@@ -180,7 +180,7 @@ def connect_to_bt_device(server_addr):
         connecting_msg = "Connecting to\n{}".format(server_addr)
         draw.text(center_text(connecting_msg, medium_font), connecting_msg, font=medium_font, fill=1, align="center")
     try:
-        client_socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+        client_socket = bluetooth.BluetoothSocket(bluetooth.L2CAP)
         client_socket.connect((server_addr, SERVER_PORT))
         print("Connecting to {} succeeded".format(server_addr))
         with canvas(oled_screen) as draw:
