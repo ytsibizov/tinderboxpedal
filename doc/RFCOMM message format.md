@@ -1,6 +1,16 @@
-# Reverse engineering the BLE message format used for app <-> amp communications
+# Reverse engineering the RFCOMM message format used for app <-> amp communications
 
 Data was collected using Bluetooth traffic snooping on Android phone. It was a surprise that some phones have problems capturing complete traffic (Nokia 6.1) while some have no problems (Samsung).
+
+The app can use both "Bluetooth Classic" (connected to "Spark 40 Audio" 
+with RFCOMM protocol) and BLE (connected to "Spark 40 BLE" that has different MAC address). The data was captured from RFCOMM communications.
+
+It seems that BLE messages can be the same. At least subscribing to notifications produces similar results for Amp->App traffic.
+
+## Messages and frames
+
+In some cases (like report of configuration from amp to the application) the
+message can be too long to fit a single frame. In this case multiple frames are sent and 
 
 ## Data frame format
 
@@ -43,6 +53,7 @@ Next 9 bytes are always zeroes:
 | Offset | 07 | 08 | 09 | 0A | 0B | 0C | 0D | 0E | 0F |
 |--------|----|----|----|----|----|----|----|----|----|
 | Data   | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 | 00 |
+
 
 ### Case of first packet / single packet response:
 
